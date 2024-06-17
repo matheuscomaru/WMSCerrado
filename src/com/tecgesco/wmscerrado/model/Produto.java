@@ -13,6 +13,15 @@ public class Produto {
 	private double dunQuantity = 0; // Quantidade no DUN'
 	private double grossWeight = 0;// Peso bruto'
 	private double netWeight = 0; // Peso líquido'
+	private int palletDataQuantity; // qtde palete
+
+	public int getPalletDataQuantity() {
+		return palletDataQuantity;
+	}
+
+	public void setPalletDataQuantity(int palletDataQuantity) {
+		this.palletDataQuantity = palletDataQuantity;
+	}
 
 	public String getProductCode() {
 		return productCode;
@@ -97,7 +106,8 @@ public class Produto {
 		sb.append("\"factoryCode\": \"" + this.factoryCode + "\",");
 		sb.append("\"dunQuantity\": " + this.dunQuantity + ",");
 		sb.append("\"grossWeight\": " + this.grossWeight + ",");
-		sb.append("\"netWeight\": " + this.netWeight);
+		sb.append("\"netWeight\": " + this.netWeight + ",");
+		sb.append("\"palletDataQuantity\": " + this.palletDataQuantity);
 		sb.append("}");
 		return sb.toString();
 	}
@@ -116,7 +126,8 @@ public class Produto {
 			sb.append("\"factoryCode\": \"" + produto.getFactoryCode() + "\",");
 			sb.append("\"dunQuantity\": " + produto.getDunQuantity() + ",");
 			sb.append("\"grossWeight\": " + produto.getGrossWeight() + ",");
-			sb.append("\"netWeight\": " + produto.getNetWeight());
+			sb.append("\"netWeight\": " + produto.getNetWeight() + ",");
+			sb.append("\"palletDataQuantity\": " + this.palletDataQuantity);
 			sb.append("}");
 			if (i < produtos.size() - 1) {
 				sb.append(",");

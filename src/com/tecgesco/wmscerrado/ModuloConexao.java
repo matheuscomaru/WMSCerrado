@@ -25,11 +25,10 @@ public class ModuloConexao {
 		String url;
 		String user = "sysdba";
 		String password = "@CHx2021$";
-		String cnpj = configDao.lerConfig("db.cnpj");
-
 		try {
 
-			url = "jdbc:firebirdsql:LOCALHOST/3050:C:\\CHSISTEMAS\\" + cnpj + "\\DADOS\\DADOS.FDB?encoding=ISO8859_1";
+			url = configDao.lerConfig("db.url");
+
 			String driver = "org.firebirdsql.jdbc.FBDriver";
 			Class.forName(driver);
 			conexao = DriverManager.getConnection(url, user, password);

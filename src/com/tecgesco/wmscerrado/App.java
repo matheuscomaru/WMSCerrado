@@ -18,7 +18,7 @@ public class App {
 
 	private static final boolean debug = true;
 	private static final String APPNOME = "WMSCERRADO";
-	private static final String VERSAO = "1.0.0";
+	private static final String VERSAO = "1.2.0";
 	static ConfigDao configDao = new ConfigDao();
 	static int porta;
 	static TrayIcon trayIcon;
@@ -73,7 +73,7 @@ public class App {
 	private static void exibirTrayIcon() throws AWTException {
 
 		SystemTray tray = SystemTray.getSystemTray();
-		ImageIcon icon = new ImageIcon(App.class.getResource("api48x48.png"));
+		ImageIcon icon = new ImageIcon(App.class.getResource("icon.png"));
 		PopupMenu popup = new PopupMenu();
 		MenuItem exitItem = new MenuItem("Encerrar Servidor");
 
@@ -86,8 +86,8 @@ public class App {
 
 		popup.add(exitItem);
 
-		trayIcon = new TrayIcon(icon.getImage(), "TecGesco API : Rodando", popup);
-		trayIcon.displayMessage("TecGesco API", "Servidor iniciado porta " + porta, MessageType.INFO);
+		trayIcon = new TrayIcon(icon.getImage(), "WMS API : Rodando", popup);
+		trayIcon.displayMessage("WMS API", "Servidor iniciado porta " + porta, MessageType.INFO);
 		Toolkit.getDefaultToolkit().beep();
 		trayIcon.setImageAutoSize(true);
 		tray.add(trayIcon);

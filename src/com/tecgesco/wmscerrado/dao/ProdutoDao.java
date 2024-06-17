@@ -45,6 +45,7 @@ public class ProdutoDao {
 				p.setDunQuantity(rs.getDouble("ITENSEMBALAGEM"));
 				p.setGrossWeight(rs.getDouble("PESOBRUTO"));
 				p.setNetWeight(rs.getDouble("PESOLIQUIDO"));
+				p.setPalletDataQuantity(rs.getInt("ITENSEMBALAGEM"));
 
 				lista.add(p);
 
@@ -83,6 +84,7 @@ public class ProdutoDao {
 				p.setDunQuantity(rs.getDouble("ITENSEMBALAGEM"));
 				p.setGrossWeight(rs.getDouble("PESOBRUTO"));
 				p.setNetWeight(rs.getDouble("PESOLIQUIDO"));
+				p.setPalletDataQuantity(rs.getInt("ITENSEMBALAGEM"));
 
 				return p;
 

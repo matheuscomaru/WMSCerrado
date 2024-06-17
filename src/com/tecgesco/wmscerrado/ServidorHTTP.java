@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 
 import com.sun.net.httpserver.HttpServer;
+import com.tecgesco.wmscerrado.controller.ListarOrdensPcpHandler;
 import com.tecgesco.wmscerrado.controller.ListarProdutosHandler;
 import com.tecgesco.wmscerrado.controller.MeuHandler;
+import com.tecgesco.wmscerrado.controller.OpPorId;
 import com.tecgesco.wmscerrado.controller.ProdutoPorId;
 
 public class ServidorHTTP {
@@ -17,6 +19,8 @@ public class ServidorHTTP {
 		server.createContext("/", new MeuHandler());
 		server.createContext("/listarprodutos", new ListarProdutosHandler());
 		server.createContext("/produto/", new ProdutoPorId());
+		server.createContext("/listarops", new ListarOrdensPcpHandler());
+		server.createContext("/op/", new OpPorId());
 
 		System.out.println("Servidor iniciado na porta " + porta);
 		server.start();
