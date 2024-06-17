@@ -127,7 +127,7 @@ public class Produto {
 			sb.append("\"dunQuantity\": " + produto.getDunQuantity() + ",");
 			sb.append("\"grossWeight\": " + produto.getGrossWeight() + ",");
 			sb.append("\"netWeight\": " + produto.getNetWeight() + ",");
-			sb.append("\"palletDataQuantity\": " + this.palletDataQuantity);
+			sb.append("\"palletDataQuantity\": " + produto.getPalletDataQuantity());
 			sb.append("}");
 			if (i < produtos.size() - 1) {
 				sb.append(",");
