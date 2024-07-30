@@ -36,8 +36,8 @@ public class OpPorId implements HttpHandler {
 
 					resposta = pcp.toJson();
 					System.out.println(resposta);
+					exchange.getResponseHeaders().set("Content-Type", "application/json");
 					exchange.sendResponseHeaders(200, 0);
-					exchange.getResponseHeaders().set("Content-Type", "application/json; charset=UTF-8");
 
 					resposta = new String(resposta.getBytes(StandardCharsets.UTF_8), StandardCharsets.UTF_8);
 

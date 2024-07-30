@@ -20,8 +20,8 @@ public class ListarProdutosHandler implements HttpHandler {
 
 		if ("GET".equals(exchange.getRequestMethod())) {
 
+			exchange.getResponseHeaders().set("Content-Type", "application/json");
 			exchange.sendResponseHeaders(200, 0);
-			exchange.getResponseHeaders().set("Content-Type", "application/json; charset=UTF-8");
 
 			ArrayList<Produto> listaProdutos = new ArrayList<>();
 			listaProdutos = produtoDao.getAll();
