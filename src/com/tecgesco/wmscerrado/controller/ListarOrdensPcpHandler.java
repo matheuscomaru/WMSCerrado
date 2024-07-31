@@ -22,7 +22,7 @@ public class ListarOrdensPcpHandler implements HttpHandler {
 
 		if ("GET".equals(exchange.getRequestMethod())) {
 
-			exchange.getResponseHeaders().set("Content-Type", "application/json");
+			exchange.getResponseHeaders().set("Content-Type", "application/json; charset=UTF-8");
 			exchange.sendResponseHeaders(200, 0);
 
 			ArrayList<OrdemProducao> lista = new ArrayList<>();
