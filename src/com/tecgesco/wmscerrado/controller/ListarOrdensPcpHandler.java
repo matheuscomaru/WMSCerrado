@@ -28,11 +28,10 @@ public class ListarOrdensPcpHandler implements HttpHandler {
 			ArrayList<OrdemProducao> lista = new ArrayList<>();
 			lista = pcpDao.getAll();
 
-			String resultado = new String(pcp.listToJson(lista).getBytes(StandardCharsets.UTF_8),
-					StandardCharsets.UTF_8);
+			String resultado = pcp.listToJson(lista);
 
 			try (OutputStream os = exchange.getResponseBody()) {
-				os.write(resultado.getBytes());
+				os.write(resultado.getBytes(StandardCharsets.UTF_8));
 
 			}
 

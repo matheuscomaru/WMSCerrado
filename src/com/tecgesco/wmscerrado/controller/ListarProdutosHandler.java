@@ -26,11 +26,10 @@ public class ListarProdutosHandler implements HttpHandler {
 			ArrayList<Produto> listaProdutos = new ArrayList<>();
 			listaProdutos = produtoDao.getAll();
 
-			String resultado = new String(produto.listToJson(listaProdutos).getBytes(StandardCharsets.UTF_8),
-					StandardCharsets.UTF_8);
+			String resultado = produto.listToJson(listaProdutos);
 
 			try (OutputStream os = exchange.getResponseBody()) {
-				os.write(resultado.getBytes());
+				os.write(resultado.getBytes(StandardCharsets.UTF_8));
 
 			}
 
