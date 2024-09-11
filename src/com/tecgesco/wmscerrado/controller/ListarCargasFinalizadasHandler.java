@@ -13,7 +13,7 @@ import com.sun.net.httpserver.HttpHandler;
 import com.tecgesco.wmscerrado.dao.CargaDao;
 import com.tecgesco.wmscerrado.model.Carga;
 
-public class ListarCargasAbertasHandler implements HttpHandler {
+public class ListarCargasFinalizadasHandler implements HttpHandler {
 
 	Carga carga = new Carga();
 	CargaDao cargaDao = new CargaDao();
@@ -21,25 +21,19 @@ public class ListarCargasAbertasHandler implements HttpHandler {
 	@Override
 	public void handle(HttpExchange exchange) throws IOException {
 
-		System.out.println("chegou");
-
 		if ("GET".equals(exchange.getRequestMethod())) {
 
 			exchange.getResponseHeaders().set("Content-Type", "application/json; charset=UTF-8");
 			exchange.sendResponseHeaders(200, 0);
 
-			// Extraindo os parâmetros da URL
 			URI requestURI = exchange.getRequestURI();
 			Map<String, String> queryParams = queryToMap(requestURI.getQuery());
 
 			String datainicial = queryParams.get("datainicial");
 			String datafinal = queryParams.get("datafinal");
 
-			System.out.println("datainicial.:" + datainicial);
-			System.out.println("datafinal.:" + datafinal);
-
 			ArrayList<Carga> lista = new ArrayList<>();
-			lista = cargaDao.getBySituacaoData(0, datainicial, datafinal);
+			lista = cargaDao.getBySituacaoData(1, datainicial, datafinal);
 
 			String resultado = carga.listToJson(lista);
 
@@ -53,7 +47,6 @@ public class ListarCargasAbertasHandler implements HttpHandler {
 		}
 	}
 
-	// Função auxiliar para converter a query string em um mapa
 	private Map<String, String> queryToMap(String query) {
 		Map<String, String> result = new HashMap<>();
 		if (query == null) {
