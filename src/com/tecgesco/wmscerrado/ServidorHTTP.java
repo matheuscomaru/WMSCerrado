@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 
 import com.sun.net.httpserver.HttpServer;
+import com.tecgesco.wmscerrado.controller.ClienteHandler;
 import com.tecgesco.wmscerrado.controller.ListarCargasCanceladasHandler;
 import com.tecgesco.wmscerrado.controller.ListarCargasFaturadasHandler;
 import com.tecgesco.wmscerrado.controller.ListarCargasFinalizadasHandler;
@@ -29,6 +30,7 @@ public class ServidorHTTP {
 		server.createContext("/listarcargasfinalizadas", new ListarCargasFinalizadasHandler());
 		server.createContext("/listarcargascanceladas", new ListarCargasCanceladasHandler());
 		server.createContext("/listarnotas", new ListarNotasHandler());
+		server.createContext("/cliente", new ClienteHandler());
 
 		System.out.println("Servidor iniciado na porta " + porta);
 		server.start();

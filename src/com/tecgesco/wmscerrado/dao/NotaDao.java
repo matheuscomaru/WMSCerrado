@@ -11,6 +11,8 @@ import javax.swing.JOptionPane;
 import com.tecgesco.wmscerrado.ModuloConexao;
 import com.tecgesco.wmscerrado.model.ItemNota;
 import com.tecgesco.wmscerrado.model.Nota;
+import com.tecgesco.wmscerrado.model.PagamentoNota;
+import com.tecgesco.wmscerrado.model.ParcelaPagamentoNota;
 
 public class NotaDao {
 
@@ -23,12 +25,21 @@ public class NotaDao {
 				+ "EMP.RAZAOSOCIAL AS NOMEEMP,\r\n"
 				+ "REPLACE(REPLACE(REPLACE(CL.CNPJCPF,'.',''),'/',''),'-','') AS CNPJCPF,\r\n"
 				+ "CL.RAZAOSOCIAL,PS.PEDIDO,0 AS SEQUENCIA,NF.CHAVEACESSONFE,\r\n"
-				+ "NF.NUMERONF, NF.SERIENF, NF.TOTALNF, NF.PESOBRUTO, NF.QTDEVOLUME\r\n"
+				+ "NF.NUMERONF, NF.SERIENF, NF.TOTALNF, NF.PESOBRUTO, NF.QTDEVOLUME,\r\n"
+				+ "CASE PS.FORMAPGTO \r\n"
+				+ "WHEN -1 THEN 'SEMPGTO'\r\n"
+				+ "WHEN 0 THEN 'DINHEIRO'\r\n"
+				+ "WHEN 3 THEN 'BOLETO'\r\n"
+				+ "WHEN 6 THEN 'BANCO'\r\n"
+				+ "WHEN 11 THEN 'PIX'\r\n"
+				+ "ELSE 'OUTROS' END AS FORMAPGTO,\r\n"
+				+ "COALESCE(PGTO.CODIGO,'') AS CODPGTO, COALESCE(PGTO.DESCRICAO,'') AS DESCPGTO\r\n"
 				+ "FROM PEDIDOSAIDA PS\r\n"
 				+ "JOIN NFSAIDA NF ON PS.CHAVE = NF.CHAVEPEDIDO\r\n"
 				+ "JOIN LOTEPEDSAIDA LOT ON LOT.CHAVE = PS.CHAVELOTEPEDSAIDA \r\n"
 				+ "JOIN CLIFOR CL ON CL.CHAVE = PS.CHAVECLIFOR\r\n"
 				+ "JOIN EMPRESA EMP ON EMP.CHAVE = PS.CHAVEEMPRESA\r\n"
+				+ "LEFT JOIN CONDPGTO PGTO ON PGTO.CHAVE = PS.CHAVECONDPGTO\r\n"
 				+ "WHERE LOT.ATIVO = 1 \r\n"
 				+ "AND NF.STATUS = 1\r\n"
 				+ "AND NF.ATIVO = 1\r\n"
@@ -44,6 +55,7 @@ public class NotaDao {
 			while (rs.next()) {
 
 				Nota nota = new Nota();
+				PagamentoNota pgto = new PagamentoNota();
 				nota.setChave(rs.getInt("CHAVE"));
 				nota.setSenderId(rs.getString("CNPJEMP"));
 				nota.setSenderName(rs.getString("NOMEEMP"));
@@ -57,6 +69,10 @@ public class NotaDao {
 				nota.setAmount(rs.getDouble("TOTALNF"));
 				nota.setWeight(rs.getDouble("PESOBRUTO"));
 				nota.setQuantity(rs.getInt("QTDEVOLUME"));
+				pgto.setId(rs.getString("FORMAPGTO").trim());
+				pgto.setBillingId(rs.getString("CODPGTO").trim());
+				pgto.setDescription(rs.getString("DESCPGTO").trim());
+				nota.setPaymentInfo(pgto);
 
 				lista.add(nota);
 
@@ -115,10 +131,51 @@ public class NotaDao {
 
 	}
 
+	public ArrayList<ParcelaPagamentoNota> getParcelas(int chavenf) {
+
+		Connection conexao = ModuloConexao.getInstance();
+
+		ArrayList<ParcelaPagamentoNota> lista = new ArrayList<>();
+
+		// @formatter:off
+		String sql = "SELECT REC.PARCELA ,\r\n"
+				+ "REC.DATACONTA, REC.VENCIMENTO, REC.VALOR \r\n"
+				+ "FROM RECEBER REC\r\n"
+				+ "WHERE REC.ATIVO= 1 AND REC.CHAVEDOC = ?\r\n"
+				+ "ORDER BY REC.PARCELA";
+		// @formatter:on
+		try {
+
+			PreparedStatement pst = conexao.prepareStatement(sql);
+			pst.setInt(1, chavenf);
+			ResultSet rs = pst.executeQuery();
+
+			while (rs.next()) {
+
+				ParcelaPagamentoNota item = new ParcelaPagamentoNota();
+				item.setItemNumber(rs.getInt("PARCELA"));
+				item.setEmitDate(rs.getString("DATACONTA"));
+				item.setDueDate(rs.getString("VENCIMENTO"));
+				item.setValue(rs.getDouble("VALOR"));
+				lista.add(item);
+
+			}
+
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+			JOptionPane.showMessageDialog(null, e1);
+
+		}
+
+		return lista;
+
+	}
+
 	private ArrayList<Nota> populaComplementos(ArrayList<Nota> lista) {
 
 		for (Nota nota : lista) {
 			nota.setItems(getItens(nota.getChave()));
+			nota.setInstallments(getParcelas(nota.getChave()));
 		}
 
 		return lista;

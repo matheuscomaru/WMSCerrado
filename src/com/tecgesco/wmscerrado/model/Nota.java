@@ -20,7 +20,7 @@ public class Nota {
 	private double quantity;
 
 	private ArrayList<ItemNota> items = new ArrayList<>();
-	private ArrayList<PagamentoNota> paymentInfo = new ArrayList<>(); // * dados de pagamento da nota
+	private PagamentoNota paymentInfo = new PagamentoNota(); // * dados de pagamento da nota
 	private ArrayList<ParcelaPagamentoNota> installments = new ArrayList<>(); // parcelas da nota (opcional)
 
 	public int getChave() {
@@ -135,11 +135,11 @@ public class Nota {
 		this.items = items;
 	}
 
-	public ArrayList<PagamentoNota> getPaymentInfo() {
+	public PagamentoNota getPaymentInfo() {
 		return paymentInfo;
 	}
 
-	public void setPaymentInfo(ArrayList<PagamentoNota> paymentInfo) {
+	public void setPaymentInfo(PagamentoNota paymentInfo) {
 		this.paymentInfo = paymentInfo;
 	}
 
@@ -179,17 +179,14 @@ public class Nota {
 
 		// Convertendo as informações de pagamento
 		json.append("\"paymentInfo\":[");
-		for (int i = 0; i < paymentInfo.size(); i++) {
-			json.append(paymentInfo.get(i).toJson());
-			if (i < paymentInfo.size() - 1) {
-				json.append(",");
-			}
-		}
+		json.append(paymentInfo.toJson());
 		json.append("],");
 
 		// Convertendo as parcelas
 		json.append("\"installments\":[");
-		for (int i = 0; i < installments.size(); i++) {
+		for (
+
+				int i = 0; i < installments.size(); i++) {
 			json.append(installments.get(i).toJson());
 			if (i < installments.size() - 1) {
 				json.append(",");
