@@ -2,8 +2,8 @@ package com.tecgesco.wmscerrado.model;
 
 public class ItensOrdemProducao {
 
-	private String productId; // id do produto no ERP
-	private int quantity;
+	private String productId = ""; // id do produto no ERP
+	private int quantity = 0;
 
 	public String getProductId() {
 		return productId;

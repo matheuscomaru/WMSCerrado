@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class OrdemProducao {
 
-	private String id;
+	private String id = "";
 	private String productionBatch = ""; // lote
 	private String expirationDate = ""; // yyyy-MM-dd data de validade
 	private String manufacturingDate = ""; // yyyy-MM-dd data de fabricaca

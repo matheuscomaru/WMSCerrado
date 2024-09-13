@@ -57,6 +57,7 @@ public class CargaDao {
 				+ "WHERE LOT.ATIVO = 1 AND TMS.ATIVO = 1\r\n"
 				+ "AND TMS.SITUACAO = ?\r\n"
 				+ "AND TMS.DATASAIDA BETWEEN ? AND ?\r\n"
+				+ "AND TMS.CODIGO <> ''"
 				+ "ORDER BY TMS.CODIGO)\r\n"
 				+ "WHERE QTDEPED = QTDENOT";
 		// @formatter:on

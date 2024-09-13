@@ -2,11 +2,11 @@ package com.tecgesco.wmscerrado.model;
 
 public class Cliente {
 
-	private String identifier; // * cnpj do cliente(sem pontuação)
-	private String referenceId; // * id do cliente no ERP
-	private String fiscalName; // * razao social do cliente
-	private String fantasyName; // * nome fantasia do cliente
-	private String phone; // * telefone do cliente
+	private String identifier = ""; // * cnpj do cliente(sem pontuação)
+	private String referenceId = ""; // * id do cliente no ERP
+	private String fiscalName = ""; // * razao social do cliente
+	private String fantasyName = ""; // * nome fantasia do cliente
+	private String phone = ""; // * telefone do cliente
 	private ClienteEndereco address = new ClienteEndereco(); // * endereco do cliente
 
 	public String getIdentifier() {

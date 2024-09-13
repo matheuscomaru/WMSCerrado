@@ -4,16 +4,16 @@ import java.util.ArrayList;
 
 public class Produto {
 
-	private String productCode; // Código/Id do produto no ER
-	private String description; // Descrição do produto no ER
-	private String ean; // Código de barras EAN do produto'
-	private String dun; // Código de barras DUN do produto'
-	private String packingInfo; // Informação da embalagem'
-	private String factoryCode; // Código de fábrica'
+	private String productCode = ""; // Código/Id do produto no ER
+	private String description = ""; // Descrição do produto no ER
+	private String ean = ""; // Código de barras EAN do produto'
+	private String dun = ""; // Código de barras DUN do produto'
+	private String packingInfo = ""; // Informação da embalagem'
+	private String factoryCode = ""; // Código de fábrica'
 	private double dunQuantity = 0; // Quantidade no DUN'
 	private double grossWeight = 0;// Peso bruto'
 	private double netWeight = 0; // Peso líquido'
-	private int palletDataQuantity; // qtde palete
+	private int palletDataQuantity = 0; // qtde palete
 
 	public int getPalletDataQuantity() {
 		return palletDataQuantity;

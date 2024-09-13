@@ -2,9 +2,9 @@ package com.tecgesco.wmscerrado.model;
 
 public class PagamentoNota {
 
-	private String id; // * identificação do pagamento, exemplo P
-	private String billingId; // * id da cobrança
-	private String description; // * descrição
+	private String id = ""; // * identificação do pagamento, exemplo P
+	private String billingId = ""; // * id da cobrança
+	private String description = ""; // * descrição
 
 	public String getId() {
 		return id;

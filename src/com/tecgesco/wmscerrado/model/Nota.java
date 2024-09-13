@@ -4,20 +4,20 @@ import java.util.ArrayList;
 
 public class Nota {
 
-	private int chave;
-	private String senderId; // * cnpj do emissor(sem pontuação)
-	private String senderName; // * nome do emissor
-	private String receiverId; // * cnpj do desinatário(sem pontuaç
-	private String receiverName; // * nome do destinatário
-	private String orderId; // * número do pedido no ERP
-	private int sequence;// * sequencia de entrega
-	private String key; // * chave da nota
+	private int chave = 0;
+	private String senderId = ""; // * cnpj do emissor(sem pontuação)
+	private String senderName = ""; // * nome do emissor
+	private String receiverId = ""; // * cnpj do desinatário(sem pontuaç
+	private String receiverName = ""; // * nome do destinatário
+	private String orderId = ""; // * número do pedido no ERP
+	private int sequence = 0;// * sequencia de entrega
+	private String key = ""; // * chave da nota
 
-	private int number; // * número da nota
-	private int series; // * série da nota
-	private double amount; // * valor da nota
-	private double weight; // * peso da nota
-	private double quantity;
+	private int number = 0; // * número da nota
+	private int series = 0; // * série da nota
+	private double amount = 0.0; // * valor da nota
+	private double weight = 0.0; // * peso da nota
+	private double quantity = 0.0;
 
 	private ArrayList<ItemNota> items = new ArrayList<>();
 	private PagamentoNota paymentInfo = new PagamentoNota(); // * dados de pagamento da nota

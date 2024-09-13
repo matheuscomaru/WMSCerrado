@@ -2,10 +2,10 @@ package com.tecgesco.wmscerrado.model;
 
 public class ParcelaPagamentoNota {
 
-	private int itemNumber; // qual parcela que é
-	private String emitDate; // 2024-09-05T20:22:36.212Z", // data de emis
-	private String dueDate; // 2024-09-05T20:22:36.212Z", // data de vencim
-	private double value;
+	private int itemNumber = 0; // qual parcela que é
+	private String emitDate = ""; // 2024-09-05T20:22:36.212Z", // data de emis
+	private String dueDate = ""; // 2024-09-05T20:22:36.212Z", // data de vencim
+	private double value = 0.0;
 
 	public int getItemNumber() {
 		return itemNumber;

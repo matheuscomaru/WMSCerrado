@@ -111,6 +111,7 @@ public class NotaDao {
 				ItemNota item = new ItemNota();
 				item.setItemNumber(rs.getInt("sequencial"));
 				item.setProductCode(rs.getString("CODIGO"));
+				item.setProductName(rs.getString("DESCRICAO"));
 				item.setEan(rs.getString("CODBARRAS"));
 				item.setQuantity(rs.getDouble("QTDE"));
 				item.setAmountUnit(rs.getDouble("VLRUNIT"));

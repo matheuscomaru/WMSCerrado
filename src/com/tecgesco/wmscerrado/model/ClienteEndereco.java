@@ -2,15 +2,15 @@ package com.tecgesco.wmscerrado.model;
 
 public class ClienteEndereco {
 
-	private String latitude; // latitude do endereco
-	private String longitude; // longitude do endereco
-	private String place; // * logradouro do endereco
-	private String addressNumber; // * numero do endereco
-	private String neighborhood; // * bairro do endereco
-	private String cityName; // * cidade do endereco
-	private String stateCode; // * uf do endereco
-	private String zipCode; // * cep do endereco
-	private String countryName; // * pais do endereco
+	private String latitude = ""; // latitude do endereco
+	private String longitude = ""; // longitude do endereco
+	private String place = ""; // * logradouro do endereco
+	private String addressNumber = ""; // * numero do endereco
+	private String neighborhood = ""; // * bairro do endereco
+	private String cityName = ""; // * cidade do endereco
+	private String stateCode = ""; // * uf do endereco
+	private String zipCode = ""; // * cep do endereco
+	private String countryName = ""; // * pais do endereco
 
 	public String getLatitude() {
 		return latitude;

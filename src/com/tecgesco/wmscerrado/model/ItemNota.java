@@ -2,14 +2,14 @@ package com.tecgesco.wmscerrado.model;
 
 public class ItemNota {
 
-	private int itemNumber; // * numero de sequencia do item
-	private String productCode; // * código de fábrica do prod
-	private String productName; // * nome do produto
-	private String ean; // * código ean do produto
-	private double quantity;// quantidade
-	private double amountUnit; // valor unnitário
-	private double amountTotal; // valor total
-	private String measurementUnit; // unidade de medida
+	private int itemNumber = 0; // * numero de sequencia do item
+	private String productCode = ""; // * código de fábrica do prod
+	private String productName = ""; // * nome do produto
+	private String ean = ""; // * código ean do produto
+	private double quantity = 0.0;// quantidade
+	private double amountUnit = 0.0; // valor unnitário
+	private double amountTotal = 0.0; // valor total
+	private String measurementUnit = ""; // unidade de medida
 
 	public int getItemNumber() {
 		return itemNumber;

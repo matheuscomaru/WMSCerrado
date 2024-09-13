@@ -4,14 +4,14 @@ import java.util.ArrayList;
 
 public class Carga {
 
-	private String responsibleId; // * id do motorista
-	private String responsibleName; // * nome do motorista
-	private String helperId; // id do ajudate
-	private String helperName; // nome do ajudante
-	private String referenceId; // * id da carga no erp
+	private String responsibleId = ""; // * id do motorista
+	private String responsibleName = ""; // * nome do motorista
+	private String helperId = ""; // id do ajudate
+	private String helperName = ""; // nome do ajudante
+	private String referenceId = ""; // * id da carga no erp
 	private Route route = new Route();
 	private Vehicle vehicle = new Vehicle();
-	private String note; // observação
+	private String note = ""; // observação
 
 	public String getResponsibleId() {
 		return responsibleId;
