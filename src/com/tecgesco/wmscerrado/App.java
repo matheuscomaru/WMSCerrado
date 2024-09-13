@@ -39,7 +39,6 @@ public class App {
 
 		System.out.println("Iniciando a aplicação!");
 		System.out.println("Verão: " + getVersao());
-
 		System.out.println("Levantando servidor...");
 		try {
 

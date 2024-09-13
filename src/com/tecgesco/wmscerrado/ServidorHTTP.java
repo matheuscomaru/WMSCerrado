@@ -23,9 +23,9 @@ public class ServidorHTTP {
 
 		server.createContext("/", new MeuHandler());
 		server.createContext("/listarprodutos", new ListarProdutosHandler());
-		server.createContext("/produto/", new ProdutoPorId());
+		server.createContext("/produto", new ProdutoPorId());
 		server.createContext("/listarops", new ListarOrdensPcpHandler());
-		server.createContext("/op/", new OpPorId());
+		server.createContext("/op", new OpPorId());
 		server.createContext("/listarcargasfaturadas", new ListarCargasFaturadasHandler());
 		server.createContext("/listarcargasfinalizadas", new ListarCargasFinalizadasHandler());
 		server.createContext("/listarcargascanceladas", new ListarCargasCanceladasHandler());

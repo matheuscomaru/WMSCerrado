@@ -10,6 +10,7 @@ import java.util.Map;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+import com.tecgesco.wmscerrado.Tools;
 import com.tecgesco.wmscerrado.dao.CargaDao;
 import com.tecgesco.wmscerrado.model.Carga;
 
@@ -17,6 +18,7 @@ public class ListarCargasFaturadasHandler implements HttpHandler {
 
 	Carga carga = new Carga();
 	CargaDao cargaDao = new CargaDao();
+	Tools ts = new Tools();
 
 	@Override
 	public void handle(HttpExchange exchange) throws IOException {
@@ -27,7 +29,7 @@ public class ListarCargasFaturadasHandler implements HttpHandler {
 			exchange.sendResponseHeaders(200, 0);
 
 			URI requestURI = exchange.getRequestURI();
-			Map<String, String> queryParams = queryToMap(requestURI.getQuery());
+			Map<String, String> queryParams = ts.queryToMap(requestURI.getQuery());
 
 			String datainicial = queryParams.get("datainicial");
 			String datafinal = queryParams.get("datafinal");
@@ -45,23 +47,6 @@ public class ListarCargasFaturadasHandler implements HttpHandler {
 		} else {
 			exchange.sendResponseHeaders(405, 0);
 		}
-	}
-
-	// Função auxiliar para converter a query string em um mapa
-	private Map<String, String> queryToMap(String query) {
-		Map<String, String> result = new HashMap<>();
-		if (query == null) {
-			return result;
-		}
-		for (String param : query.split("&")) {
-			String[] pair = param.split("=");
-			if (pair.length > 1) {
-				result.put(pair[0], pair[1]);
-			} else {
-				result.put(pair[0], "");
-			}
-		}
-		return result;
 	}
 
 }

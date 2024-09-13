@@ -11,7 +11,6 @@ import javax.swing.JOptionPane;
 import com.tecgesco.wmscerrado.ModuloConexao;
 import com.tecgesco.wmscerrado.model.ItensOrdemProducao;
 import com.tecgesco.wmscerrado.model.OrdemProducao;
-import com.tecgesco.wmscerrado.model.Produto;
 
 public class OrdemProducaoDao {
 
@@ -23,18 +22,32 @@ public class OrdemProducaoDao {
 		conexao = ModuloConexao.getInstance();
 	}
 
-	public ArrayList<OrdemProducao> getAll() {
-
+	public ArrayList<OrdemProducao> getAll(String datainicial, String datafinal, int situacao) {
+		// 0: aberto 1:finalizada 2:estornada
 		ArrayList<OrdemProducao> lista = new ArrayList<>();
 
-		String sql = "SELECT NUMORDEM,COALESCE(LOT.LOTE,'') AS LOTE, \r\n"
-				+ "LOT.VALIDADE,LOT.FABRICACAO,L.OBS, PA.CODIGO AS CODPROD, PA.DESCRICAO, IPCP.QTDE \r\n"
-				+ "FROM LANCORDEMPROD L\r\n" + "JOIN ITENSLANCORDEMPROD IPCP ON IPCP.CHAVELANCORDEMPROD = L.CHAVE\r\n"
+		//@formatter:off
+		String sql = "SELECT NUMORDEM,\r\n"
+				+ "COALESCE(LOT.LOTE,'') AS LOTE, \r\n"
+				+ "LOT.VALIDADE,\r\n"
+				+ "LOT.FABRICACAO,\r\n"
+				+ "L.OBS, \r\n"
+				+ "PA.CODIGO AS CODPROD, \r\n"
+				+ "PA.DESCRICAO, \r\n"
+				+ "IPCP.QTDE \r\n"
+				+ "FROM LANCORDEMPROD L \r\n"
+				+ "JOIN ITENSLANCORDEMPROD IPCP ON IPCP.CHAVELANCORDEMPROD = L.CHAVE\r\n"
 				+ "JOIN PRODUTO PA ON PA.CHAVE = IPCP.CHAVEPRODUTO \r\n"
 				+ "LEFT JOIN LOTEPRODUTOS LOT ON LOT.CHAVE = IPCP.CHAVELOTEPROD \r\n"
-				+ "WHERE L.ATIVO = 1 AND SITUACAO = 0 AND IPCP.ATIVO=1 AND IPCP.TIPO = 1\r\n"
-				+ "AND L.CHAVEEMPRESA = 1\r\n" + "ORDER BY IPCP.CHAVELANCORDEMPROD DESC";
-
+				+ "WHERE L.ATIVO = 1 \r\n"
+				+ "AND SITUACAO = 0 \r\n"
+				+ "AND IPCP.ATIVO=1 \r\n"
+				+ "AND IPCP.TIPO = 1\r\n"
+				+ "AND L.CHAVEEMPRESA = 1 \r\n"
+				+ "AND L.DATALANC BETWEEN '2024-08-01' AND '2025-08-01' \r\n"
+				+ "AND L.SITUACAO = 0\r\n"
+				+ "ORDER BY IPCP.CHAVELANCORDEMPROD DESC";
+		//@formatter:on
 		try {
 
 			pst = conexao.prepareStatement(sql);
@@ -73,14 +86,20 @@ public class OrdemProducaoDao {
 
 	public OrdemProducao getByCodigo(String codigo) {
 
+		//@formatter:off
 		String sql = "SELECT NUMORDEM,COALESCE(LOT.LOTE,'') AS LOTE, \r\n"
 				+ "LOT.VALIDADE,LOT.FABRICACAO,L.OBS, PA.CODIGO AS CODPROD, PA.DESCRICAO, IPCP.QTDE \r\n"
-				+ "FROM LANCORDEMPROD L\r\n" + "JOIN ITENSLANCORDEMPROD IPCP ON IPCP.CHAVELANCORDEMPROD = L.CHAVE\r\n"
+				+ "FROM LANCORDEMPROD L JOIN ITENSLANCORDEMPROD IPCP ON IPCP.CHAVELANCORDEMPROD = L.CHAVE\r\n"
 				+ "JOIN PRODUTO PA ON PA.CHAVE = IPCP.CHAVEPRODUTO \r\n"
 				+ "LEFT JOIN LOTEPRODUTOS LOT ON LOT.CHAVE = IPCP.CHAVELOTEPROD \r\n"
-				+ "WHERE L.ATIVO = 1 AND SITUACAO = 0 AND IPCP.ATIVO=1 AND IPCP.TIPO = 1\r\n"
-				+ "AND L.CHAVEEMPRESA = 1 AND L.NUMORDEM = LPAD(CAST(? AS VARCHAR(6)),6,'0') "
+				+ "WHERE L.ATIVO = 1 \r\n"
+				+ "AND SITUACAO = 0 \r\n"
+				+ "AND IPCP.ATIVO=1 \r\n"
+				+ "AND IPCP.TIPO = 1\r\n"
+				+ "AND L.CHAVEEMPRESA = 1 \r\n"
+				+ "AND L.NUMORDEM = LPAD(CAST(? AS VARCHAR(6)),6,'0') \r\n"
 				+ "ORDER BY IPCP.CHAVELANCORDEMPROD DESC";
+		//@formatter:on
 
 		try {
 
