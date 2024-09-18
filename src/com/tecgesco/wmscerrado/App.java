@@ -18,7 +18,7 @@ public class App {
 
 	private static final boolean debug = true;
 	private static final String APPNOME = "WMSCERRADO";
-	private static final String VERSAO = "1.3.1";
+	private static final String VERSAO = "1.3.3";
 	static ConfigDao configDao = new ConfigDao();
 	static int porta;
 	static TrayIcon trayIcon;

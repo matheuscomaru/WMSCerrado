@@ -178,9 +178,9 @@ public class Nota {
 		json.append("],");
 
 		// Convertendo as informações de pagamento
-		json.append("\"paymentInfo\":[");
+		json.append("\"paymentInfo\":");
 		json.append(paymentInfo.toJson());
-		json.append("],");
+		json.append(",");
 
 		// Convertendo as parcelas
 		json.append("\"installments\":[");
