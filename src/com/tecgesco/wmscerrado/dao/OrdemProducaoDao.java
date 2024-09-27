@@ -44,13 +44,16 @@ public class OrdemProducaoDao {
 				+ "AND IPCP.ATIVO=1 \r\n"
 				+ "AND IPCP.TIPO = 1\r\n"
 				+ "AND L.CHAVEEMPRESA = 1 \r\n"
-				+ "AND L.DATALANC BETWEEN '2024-08-01' AND '2025-08-01' \r\n"
-				+ "AND L.SITUACAO = 0\r\n"
+				+ "AND L.DATALANC BETWEEN ? AND ? \r\n"
+				+ "AND L.SITUACAO = ?\r\n"
 				+ "ORDER BY IPCP.CHAVELANCORDEMPROD DESC";
 		//@formatter:on
 		try {
 
 			pst = conexao.prepareStatement(sql);
+			pst.setString(1, datainicial);
+			pst.setString(2, datafinal);
+			pst.setInt(3, situacao);
 			ResultSet rs = pst.executeQuery();
 
 			while (rs.next()) {
