@@ -40,7 +40,6 @@ public class OrdemProducaoDao {
 				+ "JOIN PRODUTO PA ON PA.CHAVE = IPCP.CHAVEPRODUTO \r\n"
 				+ "LEFT JOIN LOTEPRODUTOS LOT ON LOT.CHAVE = IPCP.CHAVELOTEPROD \r\n"
 				+ "WHERE L.ATIVO = 1 \r\n"
-				+ "AND SITUACAO = 0 \r\n"
 				+ "AND IPCP.ATIVO=1 \r\n"
 				+ "AND IPCP.TIPO = 1\r\n"
 				+ "AND L.CHAVEEMPRESA = 1 \r\n"
